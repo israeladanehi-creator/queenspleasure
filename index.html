@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Queens Pleasure Enterprise — World-Class Travel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --gold-pale: #F7F0E4;
+    --ink: #0D0D0D;
+    --ink-soft: #1A1814;
+    --slate: #2C2B28;
+    --mist: #F4F1EC;
+    --mist-2: #EDE9E1;
+    --text-body: #3D3A34;
+    --text-muted: #7A776F;
+    --white: #FDFCFA;
+    --nav-h: 72px;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Outfit', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--white);
+    color: var(--ink);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(20px, 5vw, 60px);
+    z-index: 100;
+    transition: background 0.4s, backdrop-filter 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(13,13,13,0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    text-decoration: none;
+  }
+  .logo-name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(15px, 2.5vw, 18px);
+    letter-spacing: 0.12em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .logo-tag {
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold) !important;
+    color: var(--ink) !important;
+    padding: 10px 22px;
+    border-radius: 2px;
+    font-weight: 500 !important;
+    transition: opacity 0.2s !important;
+  }
+  .nav-cta:hover { opacity: 0.85; color: var(--ink) !important; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--white);
+    transition: all 0.3s;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100svh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.72) 100%),
+      url('https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1600&q=85&auto=format&fit=crop') center/cover no-repeat;
+    transform: scale(1.04);
+    animation: heroZoom 14s ease-out forwards;
+  }
+  @keyframes heroZoom {
+    to { transform: scale(1); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: clamp(40px, 8vw, 80px) clamp(20px, 5vw, 80px);
+    max-width: 860px;
+    animation: heroFade 1.2s 0.3s both ease-out;
+  }
+  @keyframes heroFade {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 36px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-headline {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(42px, 8vw, 88px);
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-size: clamp(14px, 2vw, 16px);
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.72);
+    max-width: 480px;
+    margin-bottom: 40px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold);
+    color: var(--ink);
+    padding: 16px 32px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+  }
+  .btn-primary svg { width: 16px; height: 16px; transition: transform 0.25s; }
+  .btn-primary:hover svg { transform: translateX(3px); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    padding: 16px 24px;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    right: clamp(20px, 5vw, 60px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.45);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    animation: fadeIn 1s 1.5s both;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  .hero-scroll::before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    animation: scrollLine 2s 2s infinite;
+  }
+  @keyframes scrollLine {
+    0%   { transform: scaleY(0); transform-origin: top; }
+    50%  { transform: scaleY(1); transform-origin: top; }
+    51%  { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--ink-soft);
+    padding: 24px clamp(20px, 5vw, 80px);
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── SECTION GENERAL ── */
+  section { padding: clamp(60px, 10vw, 120px) clamp(20px, 5vw, 80px); }
+
+  .section-eyebrow {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .section-title em { font-style: italic; color: var(--slate); }
+  .section-body {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-body);
+    max-width: 520px;
+  }
+
+  /* ── WHY ── */
+  .why { background: var(--mist); }
+  .why-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .why-inner { grid-template-columns: 1fr 1fr; gap: 80px; }
+  }
+
+  .why-pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--mist-2);
+    border: 1px solid var(--mist-2);
+  }
+  .pillar {
+    background: var(--white);
+    padding: 28px 24px;
+    transition: background 0.2s;
+  }
+  .pillar:hover { background: var(--gold-pale); }
+  .pillar-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 14px;
+    color: var(--gold);
+  }
+  .pillar-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .pillar-body {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ── DESTINATIONS ── */
+  .destinations-grid {
+    max-width: 1200px;
+    margin: 48px auto 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 600px) {
+    .destinations-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 900px) {
+    .destinations-grid {
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 260px 260px;
+    }
+    .dest-card:first-child { grid-row: span 2; }
+  }
+
+  .dest-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    cursor: pointer;
+    min-height: 220px;
+  }
+  .dest-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .dest-card:hover img { transform: scale(1.05); }
+  .dest-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+    transition: background 0.3s;
+  }
+  .dest-card:hover .dest-card-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.1) 60%);
+  }
+  .dest-region {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .dest-name {
+    font-family: var(--serif);
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.1;
+  }
+  .dest-cta {
+    margin-top: 10px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: all 0.3s;
+  }
+  .dest-card:hover .dest-cta { opacity: 1; transform: translateY(0); }
+
+  /* ── PROCESS ── */
+  .process { background: var(--ink-soft); }
+  .process .section-title { color: var(--white); }
+  .process .section-body { color: rgba(255,255,255,0.55); }
+  .process .section-eyebrow { color: var(--gold); }
+  .process .section-eyebrow::before { background: var(--gold); }
+
+  .steps {
+    max-width: 900px;
+    margin: 60px auto 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  @media (min-width: 600px) {
+    .steps { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .step {
+    padding: 36px 28px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+  }
+  @media (min-width: 600px) {
+    .step { border-top: none; border-left: 1px solid rgba(255,255,255,0.08); }
+    .step:first-child { border-left: none; }
+  }
+  .step-num {
+    font-family: var(--serif);
+    font-size: 56px;
+    font-weight: 300;
+    color: rgba(201,169,110,0.18);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .step-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .step-body {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--gold-pale); }
+  .testimonials-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .testi-grid {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 700px) {
+    .testi-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1000px) {
+    .testi-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .testi-card {
+    background: var(--white);
+    padding: 32px 28px;
+    border-radius: 3px;
+    border-bottom: 2px solid var(--gold);
+  }
+  .testi-quote {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .testi-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 16px;
+  }
+  .testi-stars span {
+    font-size: 13px;
+    color: var(--gold);
+  }
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .testi-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--mist-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .testi-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .testi-loc {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: clamp(80px, 12vw, 140px) clamp(20px, 5vw, 80px);
+  }
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.72)),
+      url('https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat;
+  }
+  .cta-content {
+    position: relative;
+    z-index: 2;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+  .cta-section .section-eyebrow { justify-content: center; }
+  .cta-section .section-eyebrow::before { display: none; }
+  .cta-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(36px, 6vw, 64px);
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  .cta-title em { font-style: italic; color: var(--gold-light); }
+  .cta-body {
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+  .cta-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .cta-form input {
+    flex: 1;
+    min-width: 200px;
+    padding: 15px 18px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 2px;
+    color: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .cta-form input::placeholder { color: rgba(255,255,255,0.4); }
+  .cta-form input:focus { border-color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: clamp(40px, 7vw, 80px) clamp(20px, 5vw, 80px) 32px;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 32px;
+  }
+  @media (min-width: 640px) {
+    .footer-top { grid-template-columns: 2fr 1fr 1fr; gap: 60px; }
+  }
+  .footer-logo-name {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .footer-logo-tag {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  .footer-desc {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.38);
+    max-width: 280px;
+  }
+  .footer-col-title {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 18px;
+  }
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .footer-links a {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .footer-copy {
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.22);
+    letter-spacing: 0.05em;
+  }
+  .footer-socials {
+    display: flex;
+    gap: 20px;
+  }
+  .footer-socials a {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-socials a:hover { color: var(--gold); }
+
+  /* ── MOBILE NAV DRAWER ── */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--ink);
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .mobile-menu.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .mobile-menu a {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-close {
+    position: absolute;
+    top: 24px; right: 24px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    font-size: 30px;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  @media (max-width: 767px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
+
+  /* ── REVEAL ANIMATION ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── TRUST LOGOS ── */
+  .trust {
+    padding: clamp(28px, 4vw, 44px) clamp(20px, 5vw, 80px);
+    border-top: 1px solid var(--mist-2);
+    border-bottom: 1px solid var(--mist-2);
+  }
+  .trust-label {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .trust-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 28px 48px;
+  }
+  .trust-logo {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mist-2);
+    filter: grayscale(1);
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation">
+  <button class="mobile-close" onclick="closeMenu()" aria-label="Close menu">&#215;</button>
+  <a href="#why" onclick="closeMenu()">About</a>
+  <a href="#destinations" onclick="closeMenu()">Destinations</a>
+  <a href="#process" onclick="closeMenu()">How It Works</a>
+  <a href="#cta" onclick="closeMenu()" style="color: var(--gold);">Book a Call</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="logo">
+    <span class="logo-name">Queens Pleasure</span>
+    <span class="logo-tag">Enterprise · World Travel</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#why">About</a></li>
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#process">How It Works</a></li>
+    <li><a href="#cta" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="hamburger" onclick="openMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg" role="img" aria-label="Scenic travel landscape"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Premium International Travel</p>
+    <h1 class="hero-headline">
+      The World,<br>
+      <em>Curated<br>for You.</em>
+    </h1>
+    <p class="hero-sub">Bespoke travel experiences designed around your life. From visas to villas — we handle every detail.</p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn-primary">
+        Book a Free Consultation
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#destinations" class="btn-ghost">Explore Destinations</a>
+    </div>
+  </div>
+  <span class="hero-scroll" aria-hidden="true">Scroll</span>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar" role="region" aria-label="Company stats">
+  <div class="stat">
+    <div class="stat-num">500+</div>
+    <div class="stat-label">Trips Organised</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">48</div>
+    <div class="stat-label">Countries Covered</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">98%</div>
+    <div class="stat-label">Client Satisfaction</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">10+</div>
+    <div class="stat-label">Years Experience</div>
+  </div>
+</div>
+
+<!-- WHY US -->
+<section class="why" id="why" aria-labelledby="why-title">
+  <div class="why-inner">
+    <div>
+      <p class="section-eyebrow reveal">Why Choose Us</p>
+      <h2 class="section-title reveal reveal-delay-1" id="why-title">Travel is personal.<br><em>We treat it that way.</em></h2>
+      <p class="section-body reveal reveal-delay-2">We are not a booking engine. We are your dedicated travel partner — guiding you from the first idea to your safe return home, with concierge-level care at every step.</p>
+    </div>
+    <div class="why-pillars reveal reveal-delay-2">
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <div class="pillar-title">Visa & Documents</div>
+        <p class="pillar-body">We manage all paperwork, visa applications, and travel documentation so you can focus on the excitement ahead.</p>
+      </div>
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <div class="pillar-title">Personalised Itineraries</div>
+        <p class="pillar-body">Your schedule, your pace, your preferences. Every trip is crafted uniquely around your lifestyle and desires.</p>
+      </div>
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        <div class="pillar-title">End-to-End Support</div>
+        <p class="pillar-body">Flights, accommodation, transfers, and experiences — seamlessly coordinated and always available when you need us.</p>
+      </div>
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="pillar-title">Trusted & Reliable</div>
+        <p class="pillar-body">With over a decade of experience and hundreds of successful trips, your journey is in expert hands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section id="destinations" aria-labelledby="dest-title">
+  <p class="section-eyebrow reveal">Popular Destinations</p>
+  <h2 class="section-title reveal reveal-delay-1" id="dest-title">Where will you<br><em>go next?</em></h2>
+  <div class="destinations-grid">
+    <div class="dest-card reveal reveal-delay-1">
+      <!-- Paris: Eiffel Tower with Seine river at dusk -->
+      <img src="https://images.unsplash.com/photo-1431274172761-fca41d930114?w=900&q=85&auto=format&fit=crop" alt="Paris, France — Eiffel Tower at dusk" loading="lazy">
+      <div class="dest-card-overlay">
+        <p class="dest-region">Europe</p>
+        <h3 class="dest-name">Paris,<br>France</h3>
+        <p class="dest-cta">Plan this trip →</p>
+      </div>
+    </div>
+    <div class="dest-card reveal reveal-delay-2">
+      <!-- Santorini, Greece — iconic whitewashed cliffs -->
+      <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=85&auto=format&fit=crop" alt="Santorini, Greece" loading="lazy">
+      <div class="dest-card-overlay">
+        <p class="dest-region">Europe</p>
+        <h3 class="dest-name">Santorini,<br>Greece</h3>
+        <p class="dest-cta">Plan this trip →</p>
+      </div>
+    </div>
+    <div class="dest-card reveal reveal-delay-3">
+      <!-- Dubai skyline at night with Burj Khalifa -->
+      <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=85&auto=format&fit=crop" alt="Dubai, UAE" loading="lazy">
+      <div class="dest-card-overlay">
+        <p class="dest-region">Middle East</p>
+        <h3 class="dest-name">Dubai,<br>UAE</h3>
+        <p class="dest-cta">Plan this trip →</p>
+      </div>
+    </div>
+    <div class="dest-card reveal reveal-delay-2">
+      <!-- Maldives overwater bungalows turquoise lagoon -->
+      <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=85&auto=format&fit=crop" alt="Maldives" loading="lazy">
+      <div class="dest-card-overlay">
+        <p class="dest-region">Indian Ocean</p>
+        <h3 class="dest-name">Maldives</h3>
+        <p class="dest-cta">Plan this trip →</p>
+      </div>
+    </div>
+    <div class="dest-card reveal reveal-delay-3">
+      <!-- Tokyo neon streets at night, Shibuya crossing -->
+      <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=85&auto=format&fit=crop" alt="Tokyo, Japan" loading="lazy">
+      <div class="dest-card-overlay">
+        <p class="dest-region">Asia</p>
+        <h3 class="dest-name">Tokyo,<br>Japan</h3>
+        <p class="dest-cta">Plan this trip →</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust" aria-label="As seen in">
+  <p class="trust-label">Trusted by travellers across Africa &amp; beyond</p>
+  <div class="trust-logos" aria-hidden="true">
+    <span class="trust-logo">Condé Nast</span>
+    <span class="trust-logo">Forbes Travel</span>
+    <span class="trust-logo">Lonely Planet</span>
+    <span class="trust-logo">Travel + Leisure</span>
+    <span class="trust-logo">Skyscanner</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="process" id="process" aria-labelledby="process-title">
+  <div style="max-width: 600px;">
+    <p class="section-eyebrow reveal">How It Works</p>
+    <h2 class="section-title reveal reveal-delay-1" id="process-title">Three steps to your<br><em>perfect journey.</em></h2>
+    <p class="section-body reveal reveal-delay-2">We've stripped away complexity. Getting your dream trip off the ground takes less than 30 minutes with us.</p>
+  </div>
+  <div class="steps">
+    <div class="step reveal reveal-delay-1">
+      <div class="step-num">01</div>
+      <h3 class="step-title">Book a Free Call</h3>
+      <p class="step-body">Tell us your destination, dates, and vision. A dedicated travel expert will listen and guide.</p>
+    </div>
+    <div class="step reveal reveal-delay-2">
+      <div class="step-num">02</div>
+      <h3 class="step-title">We Design Your Trip</h3>
+      <p class="step-body">Within 48 hours we'll present a fully tailored itinerary — flights, stays, experiences, and all documentation handled.</p>
+    </div>
+    <div class="step reveal reveal-delay-3">
+      <div class="step-num">03</div>
+      <h3 class="step-title">Travel With Confidence</h3>
+      <p class="step-body">Pack your bags. We are with you 24/7 from departure to your safe return home.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" aria-labelledby="testi-title">
+  <div class="testimonials-inner">
+    <p class="section-eyebrow reveal">Client Stories</p>
+    <h2 class="section-title reveal reveal-delay-1" id="testi-title">What our travellers<br><em>are saying.</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars" aria-label="5 stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testi-quote">"They handled everything — our UK visas, hotel, Eurostar tickets. All we did was show up and enjoy. Absolutely phenomenal service."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" aria-hidden="true">AO</div>
+          <div>
+            <p class="testi-name">Adaeze Okonkwo</p>
+            <p class="testi-loc">Lagos · London Trip</p>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars" aria-label="5 stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testi-quote">"Our Dubai family holiday was seamless from start to finish. Every transfer, every hotel, every restaurant — perfectly arranged. Will use them forever."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" aria-hidden="true">EB</div>
+          <div>
+            <p class="testi-name">Emeka &amp; Blessing</p>
+            <p class="testi-loc">Abuja · Dubai Trip</p>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-3">
+        <div class="testi-stars" aria-label="5 stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testi-quote">"I had never travelled internationally alone before. Queens Pleasure made me feel safe and supported the entire time. My Paris trip was a dream."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" aria-hidden="true">ZM</div>
+          <div>
+            <p class="testi-name">Zainab Musa</p>
+            <p class="testi-loc">Kano · Paris Trip</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta" aria-labelledby="cta-title">
+  <div class="cta-bg" role="img" aria-label="Luxury travel scene"></div>
+  <div class="cta-content reveal">
+    <p class="section-eyebrow" style="justify-content: center; color: var(--gold);">Ready to Travel?</p>
+    <h2 class="cta-title" id="cta-title">Your next adventure<br>starts with a<br><em>single call.</em></h2>
+    <p class="cta-body">Book a free 30-minute consultation with our travel experts. No obligation — just a conversation about where you want to go.</p>
+    <button class="btn-primary" onclick="openBookingModal()" style="margin: 0 auto;">
+      Book My Free Call
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <p style="margin-top: 18px; font-size: 12px; color: rgba(255,255,255,0.35); letter-spacing: 0.05em;">Free consultation · No commitment · Response within 24 hours</p>
+  </div>
+</section>
+
+<!-- BOOKING MODAL OVERLAY -->
+<div id="bookingOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="
+  display: none;
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+">
+  <div id="bookingModal" style="
+    background: #FDFCFA;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalIn 0.35s ease both;
+  ">
+    <style>
+      @keyframes modalIn {
+        from { opacity: 0; transform: translateY(20px) scale(0.97); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      .modal-header {
+        padding: 36px 36px 0;
+        border-bottom: 1px solid #EDE9E1;
+        padding-bottom: 24px;
+        margin-bottom: 28px;
+      }
+      .modal-close {
+        position: absolute; top: 20px; right: 22px;
+        background: none; border: none; font-size: 24px; line-height: 1;
+        color: #7A776F; cursor: pointer; padding: 4px;
+        transition: color 0.2s;
+      }
+      .modal-close:hover { color: #0D0D0D; }
+      .modal-eyebrow {
+        font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
+        color: #C9A96E; margin-bottom: 8px;
+        display: flex; align-items: center; gap: 10px;
+      }
+      .modal-eyebrow::before { content:''; width:22px; height:1px; background:#C9A96E; }
+      .modal-title {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: clamp(22px, 4vw, 30px); font-weight: 300;
+        color: #0D0D0D; line-height: 1.15;
+      }
+      .modal-body { padding: 0 36px 36px; }
+      .field-group { margin-bottom: 18px; }
+      .field-label {
+        display: block; font-size: 11px; font-weight: 500;
+        letter-spacing: 0.15em; text-transform: uppercase;
+        color: #7A776F; margin-bottom: 7px;
+      }
+      .field-input, .field-select, .field-textarea {
+        width: 100%; padding: 13px 15px;
+        font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 300;
+        background: #F4F1EC; border: 1px solid transparent;
+        border-radius: 2px; color: #0D0D0D; outline: none;
+        transition: border-color 0.2s, background 0.2s;
+        appearance: none; -webkit-appearance: none;
+      }
+      .field-input:focus, .field-select:focus, .field-textarea:focus {
+        background: #fff; border-color: #C9A96E;
+      }
+      .field-textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+      .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      @media (max-width: 480px) { .field-row { grid-template-columns: 1fr; } }
+      .modal-submit {
+        width: 100%; padding: 16px; margin-top: 8px;
+        background: #C9A96E; border: none; border-radius: 2px;
+        font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 600;
+        letter-spacing: 0.2em; text-transform: uppercase; color: #0D0D0D;
+        cursor: pointer; transition: all 0.25s;
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+      }
+      .modal-submit:hover { background: #E8D5B0; transform: translateY(-1px); }
+      .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+      .modal-note {
+        text-align: center; font-size: 11px; color: #7A776F;
+        margin-top: 14px; letter-spacing: 0.04em;
+      }
+      .status-msg {
+        display: none; padding: 14px 18px; border-radius: 2px;
+        font-size: 13px; font-weight: 400; margin-bottom: 18px; text-align: center;
+      }
+      .status-msg.success {
+        background: #EAF3DE; color: #3B6D11; border: 1px solid #C0DD97;
+      }
+      .status-msg.error {
+        background: #FCEBEB; color: #A32D2D; border: 1px solid #F7C1C1;
+      }
+      .spinner {
+        width: 16px; height: 16px; border: 2px solid rgba(0,0,0,0.2);
+        border-top-color: #0D0D0D; border-radius: 50%;
+        animation: spin 0.7s linear infinite; display: none;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeBookingModal()" aria-label="Close">&#215;</button>
+      <p class="modal-eyebrow">Free Consultation</p>
+      <h2 class="modal-title" id="modalTitle">Book your<br><em style="font-style:italic;color:#2C2B28;">travel call.</em></h2>
+    </div>
+
+    <div class="modal-body">
+      <div id="statusMsg" class="status-msg" role="alert"></div>
+
+      <!-- STEP 1: CONTACT -->
+      <div id="step1">
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="f-name">First Name</label>
+            <input class="field-input" id="f-name" type="text" placeholder="Amaka" autocomplete="given-name">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="f-surname">Last Name</label>
+            <input class="field-input" id="f-surname" type="text" placeholder="Osei" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="f-email">Email Address</label>
+          <input class="field-input" id="f-email" type="email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="f-phone">WhatsApp / Phone</label>
+          <input class="field-input" id="f-phone" type="tel" placeholder="+234 800 000 0000" autocomplete="tel">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="f-dest">Dream Destination</label>
+          <input class="field-input" id="f-dest" type="text" placeholder="e.g. Paris, Dubai, Tokyo…">
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="f-travel-date">Intended Travel Date</label>
+            <input class="field-input" id="f-travel-date" type="month" min="">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="f-pax">No. of Travellers</label>
+            <select class="field-select field-input" id="f-pax">
+              <option value="">Select…</option>
+              <option>1 — Solo</option>
+              <option>2 — Couple</option>
+              <option>3–5 — Small Group</option>
+              <option>6–10 — Group</option>
+              <option>10+ — Large Group</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="f-notes">Anything else we should know?</label>
+          <textarea class="field-textarea" id="f-notes" placeholder="Budget range, special occasions, visa concerns…"></textarea>
+        </div>
+        <button class="modal-submit" id="submitBtn" onclick="submitBooking()">
+          <span id="btnText">Send My Booking Request</span>
+          <div class="spinner" id="btnSpinner"></div>
+        </button>
+        <p class="modal-note">We'll get back to you within 24 hours to confirm your call time.</p>
+      </div>
+
+      <!-- SUCCESS STATE (shown after send) -->
+      <div id="step2" style="display:none; text-align:center; padding: 20px 0 10px;">
+        <div style="
+          width: 64px; height: 64px; border-radius: 50%;
+          background: #EAF3DE; margin: 0 auto 20px;
+          display: flex; align-items: center; justify-content: center;
+        ">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3B6D11" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:300; color:#0D0D0D; margin-bottom:12px;">Request Received!</h3>
+        <p style="font-size:14px; color:#7A776F; line-height:1.7; max-width:340px; margin:0 auto 28px;">
+          Thank you — we've received your booking request and will reach out within <strong>24 hours</strong> to schedule your free consultation.
+        </p>
+        <button class="modal-submit" onclick="closeBookingModal()" style="max-width:200px; margin:0 auto;">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <p class="footer-logo-name">Queens Pleasure</p>
+      <p class="footer-logo-tag">Enterprise · World Travel</p>
+      <p class="footer-desc">Bespoke international travel experiences for discerning travellers. Based in Nigeria. Serving the world.</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Services</p>
+      <ul class="footer-links">
+        <li><a href="#">Visa Assistance</a></li>
+        <li><a href="#">Flight Booking</a></li>
+        <li><a href="#">Hotel &amp; Stays</a></li>
+        <li><a href="#">Tour Packages</a></li>
+        <li><a href="#">Group Travel</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Company</p>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Testimonials</a></li>
+        <li><a href="#">Destinations</a></li>
+        <li><a href="#cta">Book a Call</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Queens Pleasure Enterprise. All rights reserved.</p>
+    <div class="footer-socials">
+      <a href="#">Instagram</a>
+      <a href="#">WhatsApp</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ── CONFIG — swap these when Queens Pleasure is ready ──
+  const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // from EmailJS dashboard
+  const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_abc123'
+  const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz789'
+  const RECIPIENT_EMAIL     = 'bookings@queenspleasureenterprise.com'; // placeholder
+
+  // initialise EmailJS
+  (function() {
+    if (typeof emailjs !== 'undefined') emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  })();
+
+  // ── NAV scroll effect ──
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── Mobile menu ──
+  function openMenu() {
+    document.getElementById('mobileMenu').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ── Booking Modal ──
+  const overlay = document.getElementById('bookingOverlay');
+
+  function openBookingModal() {
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    // set min travel date to current month
+    const now = new Date();
+    document.getElementById('f-travel-date').min =
+      now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+    // reset form
+    resetModal();
+  }
+
+  function closeBookingModal() {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click (outside modal card)
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeBookingModal();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.style.display === 'flex') closeBookingModal();
+  });
+
+  function resetModal() {
+    document.getElementById('step1').style.display = 'block';
+    document.getElementById('step2').style.display = 'none';
+    const msg = document.getElementById('statusMsg');
+    msg.style.display = 'none';
+    msg.className = 'status-msg';
+    document.getElementById('submitBtn').disabled = false;
+    document.getElementById('btnText').textContent = 'Send My Booking Request';
+    document.getElementById('btnSpinner').style.display = 'none';
+    ['f-name','f-surname','f-email','f-phone','f-dest','f-notes'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.value = ''; el.style.borderColor = ''; }
+    });
+    document.getElementById('f-pax').selectedIndex = 0;
+    document.getElementById('f-travel-date').value = '';
+  }
+
+  function showStatus(type, message) {
+    const msg = document.getElementById('statusMsg');
+    msg.className = 'status-msg ' + type;
+    msg.textContent = message;
+    msg.style.display = 'block';
+    msg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function setLoading(on) {
+    const btn = document.getElementById('submitBtn');
+    const txt = document.getElementById('btnText');
+    const spin = document.getElementById('btnSpinner');
+    btn.disabled = on;
+    txt.textContent = on ? 'Sending…' : 'Send My Booking Request';
+    spin.style.display = on ? 'inline-block' : 'none';
+  }
+
+  function validateForm() {
+    const required = [
+      { id: 'f-name',    label: 'First name'   },
+      { id: 'f-surname', label: 'Last name'     },
+      { id: 'f-email',   label: 'Email address' },
+      { id: 'f-phone',   label: 'Phone number'  },
+      { id: 'f-dest',    label: 'Destination'   },
+    ];
+    let valid = true;
+    required.forEach(({ id, label }) => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.style.borderColor = '#E24B4A';
+        el.addEventListener('input', () => el.style.borderColor = '', { once: true });
+        valid = false;
+      }
+    });
+    if (!valid) {
+      showStatus('error', 'Please fill in all required fields before submitting.');
+      return false;
+    }
+    const emailEl = document.getElementById('f-email');
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRe.test(emailEl.value.trim())) {
+      emailEl.style.borderColor = '#E24B4A';
+      showStatus('error', 'Please enter a valid email address.');
+      return false;
+    }
+    return true;
+  }
+
+  async function submitBooking() {
+    if (!validateForm()) return;
+
+    const data = {
+      to_email:       RECIPIENT_EMAIL,
+      client_name:    document.getElementById('f-name').value.trim() + ' ' + document.getElementById('f-surname').value.trim(),
+      client_email:   document.getElementById('f-email').value.trim(),
+      client_phone:   document.getElementById('f-phone').value.trim(),
+      destination:    document.getElementById('f-dest').value.trim(),
+      travel_date:    document.getElementById('f-travel-date').value || 'Not specified',
+      travellers:     document.getElementById('f-pax').value || 'Not specified',
+      notes:          document.getElementById('f-notes').value.trim() || 'None',
+      submitted_at:   new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' }),
+    };
+
+    setLoading(true);
+
+    // ── EmailJS is configured ──
+    const configured = EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY';
+
+    if (configured) {
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, data);
+        onSuccess();
+      } catch (err) {
+        setLoading(false);
+        showStatus('error', 'Something went wrong. Please try again or contact us directly via WhatsApp.');
+        console.error('EmailJS error:', err);
+      }
+    } else {
+      // ── Fallback: mailto: (opens client email) — active until EmailJS is configured ──
+      const subject = encodeURIComponent('New Call Booking — ' + data.client_name + ' — ' + data.destination);
+      const body = encodeURIComponent(
+        'NEW BOOKING REQUEST — Queens Pleasure Enterprise\n' +
+        '─────────────────────────────────────\n' +
+        'Client Name:     ' + data.client_name + '\n' +
+        'Email:           ' + data.client_email + '\n' +
+        'Phone/WhatsApp:  ' + data.client_phone + '\n' +
+        'Destination:     ' + data.destination + '\n' +
+        'Travel Date:     ' + data.travel_date + '\n' +
+        'Travellers:      ' + data.travellers + '\n' +
+        'Notes:           ' + data.notes + '\n' +
+        '─────────────────────────────────────\n' +
+        'Submitted:       ' + data.submitted_at + '\n' +
+        'Source:          queenspleasureenterprise.com'
+      );
+      // Slight delay so the loading state shows
+      await new Promise(r => setTimeout(r, 800));
+      window.location.href = 'mailto:' + RECIPIENT_EMAIL + '?subject=' + subject + '&body=' + body;
+      setLoading(false);
+      onSuccess();
+    }
+  }
+
+  function onSuccess() {
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = 'block';
+    // Scroll modal to top
+    document.getElementById('bookingModal').scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── Reveal on scroll ──
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
