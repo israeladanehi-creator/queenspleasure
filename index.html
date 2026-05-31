@@ -149,6 +149,7 @@
     position: relative;
     z-index: 2;
     padding: clamp(40px, 8vw, 80px) clamp(20px, 5vw, 80px);
+    padding-top: calc(var(--nav-h) + 30px);
     max-width: 860px;
     animation: heroFade 1.2s 0.3s both ease-out;
   }
@@ -844,7 +845,7 @@
   <a href="#why" onclick="closeMenu()">About</a>
   <a href="#destinations" onclick="closeMenu()">Destinations</a>
   <a href="#process" onclick="closeMenu()">How It Works</a>
-  <a href="#cta" onclick="closeMenu()" style="color: var(--gold);">Book a Call</a>
+  <a href="#" class="wa-book" onclick="closeMenu()" style="color: var(--gold);">Book a Call</a>
 </div>
 
 <!-- NAV -->
@@ -860,7 +861,7 @@
     <li><a href="#why">About</a></li>
     <li><a href="#destinations">Destinations</a></li>
     <li><a href="#process">How It Works</a></li>
-    <li><a href="#cta" class="nav-cta">Book a Call</a></li>
+    <li><a href="#" class="nav-cta wa-book">Book a Call</a></li>
   </ul>
   <button class="hamburger" onclick="openMenu()" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -878,7 +879,7 @@
     </h1>
     <p class="hero-sub">Bespoke travel experiences designed around your life. From visas to villas — we handle every detail.</p>
     <div class="hero-actions">
-      <a href="#cta" class="btn-primary">
+      <a href="#" class="btn-primary wa-book">
         Book a Free Consultation
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -1088,7 +1089,7 @@
     <p class="section-eyebrow" style="justify-content: center; color: var(--gold);">Ready to Travel?</p>
     <h2 class="cta-title" id="cta-title">Your next adventure<br>starts with a<br><em>single call.</em></h2>
     <p class="cta-body">Book a free 30-minute consultation with our travel experts. No obligation — just a conversation about where you want to go.</p>
-    <button class="btn-primary" onclick="openBookingModal()" style="margin: 0 auto;">
+    <button class="btn-primary wa-book" style="margin: 0 auto;">
       Book My Free Call
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
@@ -1506,6 +1507,21 @@
     // Scroll modal to top
     document.getElementById('bookingModal').scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  // ── WhatsApp Book-a-Call helper ──
+  const WA_NUMBER = '2348000000000'; // TODO: replace with real WhatsApp number (country code + digits, no +)
+  const WA_MESSAGE = encodeURIComponent("Hello Queens Pleasure Enterprise! I'd like to book a free call to discuss my travel plans.");
+  const WA_URL = `https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`;
+
+  function bookViaWhatsApp(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    window.open(WA_URL, '_blank', 'noopener,noreferrer');
+  }
+
+  // Wire every "Book a Call / Consultation" button to WhatsApp
+  document.querySelectorAll('.wa-book').forEach(el => {
+    el.addEventListener('click', bookViaWhatsApp);
+  });
 
   // ── Reveal on scroll ──
   const revealEls = document.querySelectorAll('.reveal');
