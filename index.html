@@ -136,8 +136,8 @@
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.72) 100%),
-      url('https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1600&q=85&auto=format&fit=crop') center/cover no-repeat;
+      linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.85) 100%),
+      url('https://images.unsplash.com/photo-1500835556837-99ac94a94552?w=1600&q=85&auto=format&fit=crop') center/cover no-repeat;
     transform: scale(1.04);
     animation: heroZoom 14s ease-out forwards;
   }
@@ -197,7 +197,6 @@
     line-height: 1.7;
     color: rgba(255,255,255,0.72);
     max-width: 480px;
-    margin-bottom: 40px;
   }
 
   .hero-actions {
@@ -399,7 +398,272 @@
     line-height: 1.7;
   }
 
-  /* ── DESTINATIONS ── */
+  /* ── WORK RELOCATION PACKAGES ── */
+  .relocation-grid {
+    max-width: 1200px;
+    margin: 48px auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  @media (min-width: 600px) {
+    .relocation-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 900px) {
+    .relocation-grid { grid-template-columns: repeat(5, 1fr); }
+  }
+
+  .reloc-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    cursor: pointer;
+    min-height: 200px;
+    border: 1px solid var(--mist-2);
+    background: var(--white);
+    transition: box-shadow 0.25s, transform 0.25s;
+    display: flex;
+    flex-direction: column;
+  }
+  .reloc-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  }
+  .reloc-flag {
+    font-size: 44px;
+    text-align: center;
+    padding: 28px 20px 12px;
+    line-height: 1;
+  }
+  .reloc-info {
+    padding: 0 18px 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .reloc-region {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .reloc-name {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2.5vw, 22px);
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .reloc-tagline {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.5;
+    flex: 1;
+  }
+  .reloc-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 14px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    transition: gap 0.2s;
+  }
+  .reloc-card:hover .reloc-cta { gap: 9px; }
+
+  /* ── COUNTRY MODAL ── */
+  #countryOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(0,0,0,0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  #countryModal {
+    background: var(--white);
+    border-radius: 4px;
+    width: 100%;
+    max-width: 520px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalIn 0.35s ease both;
+  }
+  .cmodal-flag-band {
+    background: var(--ink-soft);
+    padding: 36px 36px 28px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-bottom: 2px solid var(--gold);
+  }
+  .cmodal-flag-emoji { font-size: 52px; line-height: 1; }
+  .cmodal-country-name {
+    font-family: var(--serif);
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .cmodal-region {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .cmodal-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 26px;
+    line-height: 1;
+    color: rgba(255,255,255,0.55);
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.2s;
+  }
+  .cmodal-close:hover { color: var(--white); }
+  .cmodal-body {
+    padding: 28px 32px 32px;
+  }
+  .cmodal-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+  .cmodal-highlights {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .cmodal-highlights li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-body);
+    line-height: 1.5;
+  }
+  .cmodal-highlights li::before {
+    content: '\2736';
+    color: var(--gold);
+    font-size: 9px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .cmodal-wa-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 24px;
+    background: #25D366;
+    border: none;
+    border-radius: 2px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .cmodal-wa-btn:hover { background: #1ebe59; transform: translateY(-1px); }
+  .cmodal-wa-btn svg { width: 20px; height: 20px; fill: #fff; flex-shrink: 0; }
+
+  /* detail info grid */
+  .cmodal-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--mist-2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 22px;
+  }
+  .cmodal-info-cell {
+    padding: 13px 16px;
+    border-right: 1px solid var(--mist-2);
+    border-bottom: 1px solid var(--mist-2);
+  }
+  .cmodal-info-cell:nth-child(even) { border-right: none; }
+  .cmodal-info-cell.full-width {
+    grid-column: span 2;
+    border-right: none;
+  }
+  .cmodal-info-label {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  .cmodal-info-value {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .cmodal-info-value ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .cmodal-info-value ul li::before {
+    content: '· ';
+    color: var(--gold);
+  }
+  .cmodal-fee-bar {
+    background: var(--ink-soft);
+    border-radius: 3px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+  .cmodal-fee-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+  .cmodal-fee-amount {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  /* ── DESTINATIONS (kept for legacy nav links) ── */
   .destinations-grid {
     max-width: 1200px;
     margin: 48px auto 0;
@@ -606,8 +870,8 @@
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.72)),
-      url('https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat;
+      linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)),
+      url('https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat;
   }
   .cta-content {
     position: relative;
@@ -843,7 +1107,7 @@
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation">
   <button class="mobile-close" onclick="closeMenu()" aria-label="Close menu">&#215;</button>
   <a href="#why" onclick="closeMenu()">About</a>
-  <a href="#destinations" onclick="closeMenu()">Destinations</a>
+  <a href="#destinations" onclick="closeMenu()">Work Relocation</a>
   <a href="#process" onclick="closeMenu()">How It Works</a>
   <a href="#" class="wa-book" onclick="closeMenu()" style="color: var(--gold);">Book a Call</a>
 </div>
@@ -859,7 +1123,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#why">About</a></li>
-    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#destinations">Work Relocation</a></li>
     <li><a href="#process">How It Works</a></li>
     <li><a href="#" class="nav-cta wa-book">Book a Call</a></li>
   </ul>
@@ -879,7 +1143,7 @@
     </h1>
     <p class="hero-sub">Bespoke travel experiences designed around your life. From visas to villas — we handle every detail.</p>
     <div class="hero-actions">
-      <a href="#" class="btn-primary wa-book">
+      <a href="#" class="btn-primary wa-book" style="margin-top:5px;">
         Book a Free Consultation
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -914,89 +1178,146 @@
   <div class="why-inner">
     <div>
       <p class="section-eyebrow reveal">Why Choose Us</p>
-      <h2 class="section-title reveal reveal-delay-1" id="why-title">Travel is personal.<br><em>We treat it that way.</em></h2>
-      <p class="section-body reveal reveal-delay-2">We are not a booking engine. We are your dedicated travel partner — guiding you from the first idea to your safe return home, with concierge-level care at every step.</p>
+      <h2 class="section-title reveal reveal-delay-1" id="why-title">Travel is personal.</h2>
+      <p class="section-body reveal reveal-delay-2">With a passion for excellence and customer satisfaction, we provide professional travel solutions including visa assistance, flight bookings, hotel reservations, holiday packages, study abroad services, travel consultations, and customized tour arrangements.</p>
     </div>
     <div class="why-pillars reveal reveal-delay-2">
       <div class="pillar">
         <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        <div class="pillar-title">Visa & Documents</div>
-        <p class="pillar-body">We manage all paperwork, visa applications, and travel documentation so you can focus on the excitement ahead.</p>
+        <div class="pillar-title">School Admission</div>
+        <p class="pillar-body">Our services include school selection, admission processing, application guidance, document review, and student visa support, ensuring a smooth transition to studying abroad.</p>
       </div>
       <div class="pillar">
         <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        <div class="pillar-title">Personalised Itineraries</div>
-        <p class="pillar-body">Your schedule, your pace, your preferences. Every trip is crafted uniquely around your lifestyle and desires.</p>
+        <div class="pillar-title">Work Relocation Packages</div>
+        <p class="pillar-body">Our services include job search guidance, work permit assistance, visa application support, relocation planning, and settlement advice to help clients achieve a successful international career transition.</p>
       </div>
       <div class="pillar">
         <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-        <div class="pillar-title">End-to-End Support</div>
-        <p class="pillar-body">Flights, accommodation, transfers, and experiences — seamlessly coordinated and always available when you need us.</p>
+        <div class="pillar-title">Travel & Support Services</div>
+        <p class="pillar-body">Our services include flight reservations, travel insurance, customized tour and holiday packages, document legalization and authentication, proof of funds guidance, CAC business registration, and professional training programs.</p>
       </div>
       <div class="pillar">
         <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         <div class="pillar-title">Trusted & Reliable</div>
-        <p class="pillar-body">With over a decade of experience and hundreds of successful trips, your journey is in expert hands.</p>
+        <p class="pillar-body">With years of experience and more than a dozen successful trips, your journey is in expert hands.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DESTINATIONS -->
+<!-- WORK RELOCATION PACKAGES -->
 <section id="destinations" aria-labelledby="dest-title">
-  <p class="section-eyebrow reveal">Popular Destinations</p>
-  <h2 class="section-title reveal reveal-delay-1" id="dest-title">Where will you<br><em>go next?</em></h2>
-  <div class="destinations-grid">
-    <div class="dest-card reveal reveal-delay-1">
-      <!-- Paris: Eiffel Tower with Seine river at dusk -->
-      <img src="https://images.unsplash.com/photo-1431274172761-fca41d930114?w=900&q=85&auto=format&fit=crop" alt="Paris, France — Eiffel Tower at dusk" loading="lazy">
-      <div class="dest-card-overlay">
-        <p class="dest-region">Europe</p>
-        <h3 class="dest-name">Paris,<br>France</h3>
-        <p class="dest-cta">Plan this trip →</p>
+  <p class="section-eyebrow reveal">Work Relocation Packages</p>
+  <h2 class="section-title reveal reveal-delay-1" id="dest-title">Your new life,<br><em>starts here.</em></h2>
+  <p class="section-body reveal reveal-delay-2" style="margin-bottom:0;">We specialise in helping Nigerians secure work opportunities and relocate to Europe. Click any country to see package details.</p>
+  <div class="relocation-grid">
+
+    <div class="reloc-card reveal reveal-delay-1" onclick="openCountryModal('bulgaria')">
+      <div class="reloc-flag">🇧🇬</div>
+      <div class="reloc-info">
+        <p class="reloc-region">Eastern Europe</p>
+        <h3 class="reloc-name">Bulgaria</h3>
+        <p class="reloc-tagline">Affordable living, EU access & growing job market.</p>
+        <span class="reloc-cta">View Package →</span>
       </div>
     </div>
-    <div class="dest-card reveal reveal-delay-2">
-      <!-- Santorini, Greece — iconic whitewashed cliffs -->
-      <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=85&auto=format&fit=crop" alt="Santorini, Greece" loading="lazy">
-      <div class="dest-card-overlay">
-        <p class="dest-region">Europe</p>
-        <h3 class="dest-name">Santorini,<br>Greece</h3>
-        <p class="dest-cta">Plan this trip →</p>
+
+    <div class="reloc-card reveal reveal-delay-1" onclick="openCountryModal('czechia')">
+      <div class="reloc-flag">🇨🇿</div>
+      <div class="reloc-info">
+        <p class="reloc-region">Central Europe</p>
+        <h3 class="reloc-name">Czechia</h3>
+        <p class="reloc-tagline">Low unemployment & strong manufacturing sector.</p>
+        <span class="reloc-cta">View Package →</span>
       </div>
     </div>
-    <div class="dest-card reveal reveal-delay-3">
-      <!-- Dubai skyline at night with Burj Khalifa -->
-      <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=85&auto=format&fit=crop" alt="Dubai, UAE" loading="lazy">
-      <div class="dest-card-overlay">
-        <p class="dest-region">Middle East</p>
-        <h3 class="dest-name">Dubai,<br>UAE</h3>
-        <p class="dest-cta">Plan this trip →</p>
+
+    <div class="reloc-card reveal reveal-delay-2" onclick="openCountryModal('norway')">
+      <div class="reloc-flag">🇳🇴</div>
+      <div class="reloc-info">
+        <p class="reloc-region">Northern Europe</p>
+        <h3 class="reloc-name">Norway</h3>
+        <p class="reloc-tagline">High salaries, strong welfare & quality of life.</p>
+        <span class="reloc-cta">View Package →</span>
       </div>
     </div>
-    <div class="dest-card reveal reveal-delay-2">
-      <!-- Maldives overwater bungalows turquoise lagoon -->
-      <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=85&auto=format&fit=crop" alt="Maldives" loading="lazy">
-      <div class="dest-card-overlay">
-        <p class="dest-region">Indian Ocean</p>
-        <h3 class="dest-name">Maldives</h3>
-        <p class="dest-cta">Plan this trip →</p>
+
+    <div class="reloc-card reveal reveal-delay-2" onclick="openCountryModal('slovakia')">
+      <div class="reloc-flag">🇸🇰</div>
+      <div class="reloc-info">
+        <p class="reloc-region">Central Europe</p>
+        <h3 class="reloc-name">Slovakia</h3>
+        <p class="reloc-tagline">EU member with rising demand for skilled workers.</p>
+        <span class="reloc-cta">View Package →</span>
       </div>
     </div>
-    <div class="dest-card reveal reveal-delay-3">
-      <!-- Tokyo neon streets at night, Shibuya crossing -->
-      <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=85&auto=format&fit=crop" alt="Tokyo, Japan" loading="lazy">
-      <div class="dest-card-overlay">
-        <p class="dest-region">Asia</p>
-        <h3 class="dest-name">Tokyo,<br>Japan</h3>
-        <p class="dest-cta">Plan this trip →</p>
+
+    <div class="reloc-card reveal reveal-delay-2" onclick="openCountryModal('hungary')">
+      <div class="reloc-flag">🇭🇺</div>
+      <div class="reloc-info">
+        <p class="reloc-region">Central Europe</p>
+        <h3 class="reloc-name">Hungary</h3>
+        <p class="reloc-tagline">Booming tech & automotive industries await.</p>
+        <span class="reloc-cta">View Package →</span>
       </div>
     </div>
+
+    <div class="reloc-card reveal reveal-delay-3" onclick="openCountryModal('austria')">
+      <div class="reloc-flag">🇦🇹</div>
+      <div class="reloc-info">
+        <p class="reloc-region">Central Europe</p>
+        <h3 class="reloc-name">Austria</h3>
+        <p class="reloc-tagline">Gateway to Western Europe with excellent pay.</p>
+        <span class="reloc-cta">View Package →</span>
+      </div>
+    </div>
+
+    <div class="reloc-card reveal reveal-delay-3" onclick="openCountryModal('lithuania')">
+      <div class="reloc-flag">🇱🇹</div>
+      <div class="reloc-info">
+        <p class="reloc-region">Baltic Europe</p>
+        <h3 class="reloc-name">Lithuania</h3>
+        <p class="reloc-tagline">Fast-growing economy with straightforward permits.</p>
+        <span class="reloc-cta">View Package →</span>
+      </div>
+    </div>
+
+    <div class="reloc-card reveal reveal-delay-3" onclick="openCountryModal('serbia')">
+      <div class="reloc-flag">🇷🇸</div>
+      <div class="reloc-info">
+        <p class="reloc-region">Balkans</p>
+        <h3 class="reloc-name">Serbia</h3>
+        <p class="reloc-tagline">Low cost of living & welcoming immigration path.</p>
+        <span class="reloc-cta">View Package →</span>
+      </div>
+    </div>
+
+    <div class="reloc-card reveal reveal-delay-4" onclick="openCountryModal('montenegro')">
+      <div class="reloc-flag">🇲🇪</div>
+      <div class="reloc-info">
+        <p class="reloc-region">Balkans</p>
+        <h3 class="reloc-name">Montenegro</h3>
+        <p class="reloc-tagline">EU candidate nation with tourism-driven growth.</p>
+        <span class="reloc-cta">View Package →</span>
+      </div>
+    </div>
+
+    <div class="reloc-card reveal reveal-delay-4" onclick="openCountryModal('ukraine')">
+      <div class="reloc-flag">🇺🇦</div>
+      <div class="reloc-info">
+        <p class="reloc-region">Eastern Europe</p>
+        <h3 class="reloc-name">Ukraine</h3>
+        <p class="reloc-tagline">Reconstruction economy creating vast opportunities.</p>
+        <span class="reloc-cta">View Package →</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- TRUST -->
-<div class="trust" aria-label="As seen in">
+<!-- <div class="trust" aria-label="As seen in">
   <p class="trust-label">Trusted by travellers across Africa &amp; beyond</p>
   <div class="trust-logos" aria-hidden="true">
     <span class="trust-logo">Condé Nast</span>
@@ -1005,7 +1326,7 @@
     <span class="trust-logo">Travel + Leisure</span>
     <span class="trust-logo">Skyscanner</span>
   </div>
-</div>
+</div> -->
 
 <!-- HOW IT WORKS -->
 <section class="process" id="process" aria-labelledby="process-title">
@@ -1509,7 +1830,7 @@
   }
 
   // ── WhatsApp Book-a-Call helper ──
-  const WA_NUMBER = '2348000000000'; // TODO: replace with real WhatsApp number (country code + digits, no +)
+  const WA_NUMBER = '2349012786261';
   const WA_MESSAGE = encodeURIComponent("Hello Queens Pleasure Enterprise! I'd like to book a free call to discuss my travel plans.");
   const WA_URL = `https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`;
 
@@ -1523,7 +1844,184 @@
     el.addEventListener('click', bookViaWhatsApp);
   });
 
-  // ── Reveal on scroll ──
+  // ── Country Relocation Data ──
+  const COUNTRIES = {
+    bulgaria: {
+      flag: '🇧🇬', name: 'Bulgaria', region: 'Eastern Europe',
+      desc: 'Bulgaria is one of Europe\'s most affordable destinations for work relocation, with a low cost of living, EU freedom of movement benefits, and a growing demand for hospitality, construction, and IT workers. Our package covers your full journey — from job placement to settling in.',
+      details: {
+        visaType: '9-Month Work Visa Contract',
+        processingTime: '3 – 4 months',
+        location: 'Bulgaria',
+        jobs: ['Warehouse Workers', 'Waiters / Waitresses', 'Construction Workers', 'Housekeepers'],
+        salary: '€1,500 / month',
+        benefits: ['Job Accommodation Provided', 'Legal Work Opportunity in Bulgaria', 'Structured Employment Contract'],
+        requirements: [],
+        processingFee: null
+      }
+    },
+    czechia: {
+      flag: '🇨🇿', name: 'Czechia', region: 'Central Europe',
+      desc: 'Czechia (Czech Republic) boasts one of the lowest unemployment rates in the EU and strong demand in manufacturing, engineering, and logistics. Prague and Brno offer vibrant city life alongside excellent wages. We handle your work visa, job matching, and full relocation support.',
+      highlights: ['Employee Card (Work Visa)', 'CV & Job Application Support', 'Pre-travel Document Check', 'Czech Labour Law Briefing', 'Accommodation Search Support', 'Embassy Appointment Prep']
+    },
+    norway: {
+      flag: '🇳🇴', name: 'Norway', region: 'Northern Europe',
+      desc: 'Norway consistently ranks among the world\'s best countries to live and work in, with exceptional wages, world-class healthcare, and stunning landscapes. Skilled workers in food production and manufacturing are currently in high demand. Our Norway package is premium, thorough, and end-to-end.',
+      details: {
+        visaType: '2-Year Work Visa',
+        processingTime: '4 – 5 months',
+        location: 'Norway',
+        jobs: ['Milk Factory Production Workers', 'Seafood Production Workers'],
+        salary: '€3,200 – €4,800 / month',
+        benefits: [],
+        requirements: [],
+        processingFee: '€3,200'
+      }
+    },
+    slovakia: {
+      flag: '🇸🇰', name: 'Slovakia', region: 'Central Europe',
+      desc: 'Slovakia is an EU member state with a rapidly growing economy, particularly in automotive, electronics, and shared services. Bratislava, just an hour from Vienna, offers a cosmopolitan lifestyle at much lower cost. Our package streamlines your work permit and gets you settled fast.',
+      details: {
+        visaType: '2-Year Work Visa',
+        processingTime: '4 – 7 months',
+        location: 'Slovakia',
+        jobs: ['Quality Control Staff', 'Automotive Operators', 'Factory Production / Shift Workers'],
+        salary: '€1,140 / month',
+        benefits: ['Free accommodation', 'Free transportation', 'Shift work system (day & night shifts available)'],
+        requirements: [],
+        processingFee: '$2,500'
+      }
+    },
+    hungary: {
+      flag: '🇭🇺', name: 'Hungary', region: 'Central Europe',
+      desc: 'Hungary is experiencing a tech and automotive boom, with companies like Samsung, BMW, and numerous startups establishing major operations in Budapest and beyond. The Guest Worker Permit makes legal employment accessible, and our team ensures your application is done correctly.',
+      details: {
+        visaType: '9-Month Work Permit',
+        processingTime: '2 – 3 months',
+        location: 'Hungary',
+        jobs: ['Fruit and Vegetable Farm Worker'],
+        salary: '€1,000 / month',
+        benefits: ['Accommodation provided'],
+        requirements: [],
+        processingFee: '€1,800'
+      }
+    },
+    austria: {
+      flag: '🇦🇹', name: 'Austria', region: 'Central Europe',
+      desc: 'Austria sits at the heart of Europe with excellent pay, strong workers\' rights, and a high quality of life. Vienna consistently ranks in the top 3 most liveable cities globally. High demand exists in healthcare, with our current package focused on caregiving roles.',
+      details: {
+        visaType: '2-Year Work Permit',
+        processingTime: '3 – 5 months',
+        location: 'Austria',
+        jobs: ['Caregiver (Healthcare Assistant)'],
+        salary: '€3,200 – €3,500 / month',
+        benefits: ['Free accommodation', 'Free meals provided'],
+        requirements: ['Medical diploma (Health-related qualification required)'],
+        processingFee: '€3,200'
+      }
+    },
+    lithuania: {
+      flag: '🇱🇹', name: 'Lithuania', region: 'Baltic Europe',
+      desc: 'Lithuania is one of the fastest-growing economies in the EU, with a welcoming immigration framework and strong sectors in IT, logistics, and manufacturing. Vilnius is a modern, affordable capital with a booming startup scene. Our Baltic package offers a smooth, well-guided relocation experience.',
+      highlights: ['National Visa D Support', 'IT & Logistics Job Matching', 'Vilnius City Orientation', 'Residence Registration Help', 'English-Friendly Environment', 'Affordable Living Guide']
+    },
+    serbia: {
+      flag: '🇷🇸', name: 'Serbia', region: 'Balkans',
+      desc: 'Serbia offers one of the most accessible relocation pathways in Europe, with a low cost of living, no requirement for a job offer to obtain a temporary stay permit, and a thriving tech and services economy in Belgrade. Ideal for entrepreneurs and remote workers as well as employed individuals.',
+      highlights: ['Temporary Stay Permit', 'Freelancer-Friendly Pathway', 'Belgrade City Orientation', 'Low Cost of Living Briefing', 'Business Registration Support', 'Expatriate Community Access']
+    },
+    montenegro: {
+      flag: '🇲🇪', name: 'Montenegro', region: 'Balkans',
+      desc: 'Montenegro is an EU candidate nation with a rapidly growing tourism and hospitality sector, stunning Adriatic coastline, and a straightforward work permit process. As the country modernises its economy, skilled workers are increasingly in demand across hospitality, construction, and services.',
+      highlights: ['Work Permit Application Support', 'Hospitality Sector Placement', 'Podgorica / Budva Guidance', 'Affordable Adriatic Living', 'EU Candidate Status Briefing', 'Document Apostille Help']
+    },
+    ukraine: {
+      flag: '🇺🇦', name: 'Ukraine', region: 'Eastern Europe',
+      desc: 'Ukraine\'s reconstruction economy is creating significant employment opportunities across construction, engineering, and logistics. For those willing to be part of a historic rebuilding effort, our Ukraine package provides full guidance on the work permit process, safety briefings, and placement with verified employers.',
+      details: {
+        visaType: '1-Year Work Permit',
+        processingTime: null,
+        location: 'Ukraine',
+        jobs: ['Seamstress', 'Concrete Worker', 'Welder', 'Carpenter', 'Warehouse Worker', 'Delivery Worker'],
+        salary: '€1,000 – €1,200 / month',
+        benefits: [],
+        requirements: [],
+        processingFee: '€1,900'
+      }
+    }
+  };
+
+  function renderList(arr) {
+    if (!arr || !arr.length) return '—';
+    return `<ul>${arr.map(i => `<li>${i}</li>`).join('')}</ul>`;
+  }
+
+  function openCountryModal(key) {
+    const c = COUNTRIES[key];
+    if (!c) return;
+    document.getElementById('cmodalFlag').textContent = c.flag;
+    document.getElementById('cmodalTitle').textContent = c.name;
+    document.getElementById('cmodalRegion').textContent = c.region;
+    document.getElementById('cmodalDesc').textContent = c.desc;
+    document.getElementById('cmodalCountryInline').textContent = c.name;
+
+    // Render structured details if present
+    const detailsEl = document.getElementById('cmodalDetails');
+    if (c.details) {
+      const d = c.details;
+      let cells = '';
+      cells += `<div class="cmodal-info-cell"><div class="cmodal-info-label">Visa Type</div><div class="cmodal-info-value">${d.visaType}</div></div>`;
+      if (d.processingTime) {
+        cells += `<div class="cmodal-info-cell"><div class="cmodal-info-label">Processing Time</div><div class="cmodal-info-value">${d.processingTime}</div></div>`;
+      } else {
+        cells += `<div class="cmodal-info-cell"><div class="cmodal-info-label">Job Location</div><div class="cmodal-info-value">${d.location}</div></div>`;
+      }
+      if (d.processingTime) {
+        cells += `<div class="cmodal-info-cell"><div class="cmodal-info-label">Job Location</div><div class="cmodal-info-value">${d.location}</div></div>`;
+      }
+      cells += `<div class="cmodal-info-cell${d.processingTime ? '' : ' full-width'}"><div class="cmodal-info-label">Monthly Salary</div><div class="cmodal-info-value">${d.salary}</div></div>`;
+      if (d.jobs && d.jobs.length) {
+        cells += `<div class="cmodal-info-cell full-width"><div class="cmodal-info-label">Available Job${d.jobs.length > 1 ? 's' : ''}</div><div class="cmodal-info-value">${renderList(d.jobs)}</div></div>`;
+      }
+      if (d.benefits && d.benefits.length) {
+        cells += `<div class="cmodal-info-cell full-width"><div class="cmodal-info-label">Benefits</div><div class="cmodal-info-value">${renderList(d.benefits)}</div></div>`;
+      }
+      if (d.requirements && d.requirements.length) {
+        cells += `<div class="cmodal-info-cell full-width"><div class="cmodal-info-label">Requirements</div><div class="cmodal-info-value">${renderList(d.requirements)}</div></div>`;
+      }
+      detailsEl.innerHTML = `
+        <div class="cmodal-info-grid">${cells}</div>
+        ${d.processingFee ? `<div class="cmodal-fee-bar">
+          <span class="cmodal-fee-label">Processing Fee</span>
+          <span class="cmodal-fee-amount">${d.processingFee}</span>
+        </div>` : ''}`;
+    } else {
+      detailsEl.innerHTML = '';
+    }
+
+    // Highlights (for countries without structured details)
+    const ul = document.getElementById('cmodalHighlights');
+    ul.innerHTML = c.highlights ? c.highlights.map(h => `<li>${h}</li>`).join('') : '';
+
+    const msg = encodeURIComponent(`Hello Queens Pleasure Enterprise! I'd like to book a free call — I'm interested in the Work Relocation Package for ${c.name}.`);
+    document.getElementById('cmodalWaBtn').href = `https://wa.me/2349012786261?text=${msg}`;
+
+    const overlay = document.getElementById('countryOverlay');
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCountryModal() {
+    document.getElementById('countryOverlay').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeCountryModal();
+  });
+
+
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -1535,5 +2033,28 @@
   }, { threshold: 0.12 });
   revealEls.forEach(el => io.observe(el));
 </script>
+<!-- COUNTRY DETAIL MODAL -->
+<div id="countryOverlay" role="dialog" aria-modal="true" aria-labelledby="cmodalTitle" onclick="if(event.target===this)closeCountryModal()">
+  <div id="countryModal">
+    <div class="cmodal-flag-band">
+      <button class="cmodal-close" onclick="closeCountryModal()" aria-label="Close">&#215;</button>
+      <div class="cmodal-flag-emoji" id="cmodalFlag">🇧🇬</div>
+      <div>
+        <h2 class="cmodal-country-name" id="cmodalTitle">Bulgaria</h2>
+        <p class="cmodal-region" id="cmodalRegion">Eastern Europe</p>
+      </div>
+    </div>
+    <div class="cmodal-body">
+      <p class="cmodal-desc" id="cmodalDesc"></p>
+      <div id="cmodalDetails"></div>
+      <ul class="cmodal-highlights" id="cmodalHighlights"></ul>
+      <a id="cmodalWaBtn" class="cmodal-wa-btn" href="#" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Book a Call — I'm Interested in <span id="cmodalCountryInline">Bulgaria</span>
+      </a>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
