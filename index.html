@@ -352,7 +352,12 @@
   }
 
   /* ── WHY ── */
-  .why { background: var(--mist); }
+  .why {
+    position: relative;
+    background:
+      linear-gradient(rgba(244,241,236,0.92), rgba(237,233,225,0.90)),
+      url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat fixed;
+  }
   .why-inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -737,7 +742,14 @@
   .dest-card:hover .dest-cta { opacity: 1; transform: translateY(0); }
 
   /* ── PROCESS ── */
-  .process { background: var(--ink-soft); }
+  .process {
+    position: relative;
+    background:
+      linear-gradient(rgba(10,10,10,0.76), rgba(10,10,10,0.72)),
+      url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1600&q=85&auto=format&fit=crop') center/cover no-repeat;
+    filter: saturate(0.55) brightness(0.95);
+  }
+  .process > * { filter: saturate(1.82) brightness(1.05); }
   .process .section-title { color: var(--white); }
   .process .section-body { color: rgba(255,255,255,0.55); }
   .process .section-eyebrow { color: var(--gold); }
@@ -870,8 +882,9 @@
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)),
-      url('https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat;
+      linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.70)),
+      url('https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=1600&q=85&auto=format&fit=crop') center/cover no-repeat;
+    filter: saturate(0.6);
   }
   .cta-content {
     position: relative;
@@ -1127,7 +1140,7 @@
     <li><a href="#process">How It Works</a></li>
     <li><a href="#" class="nav-cta wa-book">Book a Call</a></li>
   </ul>
-  <button class="hamburger" onclick="openMenu()" aria-label="Open menu">
+  <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -1638,9 +1651,7 @@
   <div class="footer-bottom">
     <p class="footer-copy">© 2025 Queens Pleasure Enterprise. All rights reserved.</p>
     <div class="footer-socials">
-      <a href="#">Instagram</a>
-      <a href="#">WhatsApp</a>
-      <a href="#">LinkedIn</a>
+      <a href="https://wa.me/2349012786261" target="_blank" rel="noopener noreferrer">WhatsApp</a>
     </div>
   </div>
 </footer>
@@ -1668,11 +1679,17 @@
   function openMenu() {
     document.getElementById('mobileMenu').classList.add('open');
     document.body.style.overflow = 'hidden';
+    document.getElementById('hamburgerBtn').setAttribute('aria-expanded', 'true');
   }
   function closeMenu() {
     document.getElementById('mobileMenu').classList.remove('open');
     document.body.style.overflow = '';
+    document.getElementById('hamburgerBtn').setAttribute('aria-expanded', 'false');
   }
+  document.getElementById('hamburgerBtn').addEventListener('click', function() {
+    const menu = document.getElementById('mobileMenu');
+    if (menu.classList.contains('open')) { closeMenu(); } else { openMenu(); }
+  });
 
   // ── Booking Modal ──
   const overlay = document.getElementById('bookingOverlay');
@@ -1831,7 +1848,7 @@
 
   // ── WhatsApp Book-a-Call helper ──
   const WA_NUMBER = '2349012786261';
-  const WA_MESSAGE = encodeURIComponent("Hello Queens Pleasure Enterprise! I'd like to book a free call to discuss my travel plans.");
+  const WA_MESSAGE = encodeURIComponent("Hello Queens Pleasure Enterprise! My name is [your name]. I'd like to book a free call to discuss my travel plans.");
   const WA_URL = `https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`;
 
   function bookViaWhatsApp(e) {
@@ -1857,7 +1874,7 @@
         salary: '€1,500 / month',
         benefits: ['Job Accommodation Provided', 'Legal Work Opportunity in Bulgaria', 'Structured Employment Contract'],
         requirements: [],
-        processingFee: null
+        processingFee: '€2,500'
       }
     },
     czechia: {
@@ -2004,7 +2021,7 @@
     const ul = document.getElementById('cmodalHighlights');
     ul.innerHTML = c.highlights ? c.highlights.map(h => `<li>${h}</li>`).join('') : '';
 
-    const msg = encodeURIComponent(`Hello Queens Pleasure Enterprise! I'd like to book a free call — I'm interested in the Work Relocation Package for ${c.name}.`);
+    const msg = encodeURIComponent(`Hello Queens Pleasure Enterprise! My name is [your name]. I'd like to book a free call — I'm interested in the Work Relocation Package for ${c.name}.`);
     document.getElementById('cmodalWaBtn').href = `https://wa.me/2349012786261?text=${msg}`;
 
     const overlay = document.getElementById('countryOverlay');
